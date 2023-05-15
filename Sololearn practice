@@ -1,0 +1,97 @@
+Task 1. Selecting Multiple Columns
+    When buying food, it is important to make sure it is fresh and not expired.
+    You are given the following 'Products' list:
+    productname | price | productiondate | expirationdate
+    Write a query to select the ProductName, ProductionDate and ExpirationDate.
+
+    My answer:
+    select productname,productiondate,expirationdate
+    from products;
+
+Task 2. The DISTINCT Keyword
+    At the conclusion of a bank transaction, 6 checks are printed -- 3 originals for the bank, and 3 copies for the customer.
+    Here is the list of all the checks named Operation
+    id | checks 
+    Write a query to show only the unique checks that are given to the customer.
+
+    My answer:
+    /* table name: Operation */select distinct checks
+    from Operation
+
+Task 3. Cakes
+    A local bakery creates unique cake sets. Each cake set contains three different cakes.
+    Here is the cakes table:
+    name | calories
+    Тoday a customer wants a cake set that has minimal calories.
+    Write a query to sort the cakes by calorie count and select the first 3 cakes from the list to offer the customer.
+
+    My answer:
+    select distinct name, calories
+    from Cakes
+    order by calories
+    limit 3
+    
+Task 4. Logical Operators
+    You are given the following films table with details about superhero movies:
+    name | gender | year | production
+    Write a query to output the names of all of the films which were produced by Marvel Studios in 2010 or later, sorted by the 'name' column.
+
+    My answer:    
+    select name
+    from films
+    where production = 'Marvel Studios' and year>=2010
+    order by name
+    
+Task 5. Apartments
+    You want to rent an apartment and have the following table named Apartments: 
+    id | city | address | price | status
+    Write a query to output the apartments whose prices are greater than the average and are also not rented, sorted by the 'Price' column.
+
+    My answer 
+    select * from Apartments 
+    where price > (select avg(price)from Apartments) and status='Not rented'
+    order by price
+    
+Task 6. Joining Tables
+    You are given the following students and teachers tables 
+    students (with their teachers ID's):
+      id | firstname | lastname | teacherid
+    teachers:
+      id | firstname | lastname
+     Write a query to output all of the students with their teachers' last names in one table, sorted by students ID.
+  
+    My answer:
+    select students.id,students.firstname, students.lastname,teachers.lastname AS teacher
+    from students,teachers
+    where teachers.id = students.teacherid
+    order by students.id
+    
+Task 7. The INSERT Statement
+    You have started a car rental service and have the following cars:
+    Garage:
+    id | make | model | prodyear
+    You plan to add two more vehicles to your garage: 6, 'Mercedes-Benz', 'G 63', 2020 and  7, 'Porsche', 'Panamera', 2020
+    Write a query to insert the new cars into your table named 'Garage'. Then show the table with the added records.
+    
+    My answer:
+    insert into Garage (id,make,model,prodyear) values
+    (6,'Mercedes-Benz','G 63',2020),
+    (7,'Porsche','Panamera',2020);
+    select * from Garage
+    
+Task 8. Zoo
+    You manage a zoo. Each animal in the zoo comes from a different country. Here are the tables you have:
+    Animals:
+    name | type | country_id
+    Countries:
+    id | country
+    1) A new animal has come in, with the following details: name - "Slim", type - "Giraffe", country_id - 1 . Add him to the Animals table.
+    2) You want to make a complete list of the animals for the zoo’s visitors. Write a query to output a new table with each animal's name, type and country fields, sorted by countries.
+
+    My answer:
+    Insert into Animals
+    VALUES ('Slim','Giraffe',1);
+    select name,type,country
+    from Animals INNER JOIN Countries
+    ON Animals.country_id=Countries.id
+    order by Animals.country_id DESC; 
